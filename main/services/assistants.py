@@ -19,6 +19,7 @@ def get_reply(message_body):
     assistant_repo = AssistantRepository()
     openai_api_key = os.environ.get('OPENAI_API_KEY')
     client = OpenAI(api_key=openai_api_key)
+    logger.info(f'OpenAI client created')
     assitant_name = message_body['assistant_name']
     assistant_id = os.environ.get(assitant_name)
     assistant_object = client.beta.assistants.retrieve(assistant_id)

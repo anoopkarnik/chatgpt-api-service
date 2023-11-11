@@ -14,7 +14,6 @@ import uuid
 logger = logging.getLogger(__name__)
 
 def create_text_to_speech(message_body):
-    logger.info(f'OpenAI client created')
     client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
     logger.info(f'OpenAI client created')
     response = client.audio.speech.create(

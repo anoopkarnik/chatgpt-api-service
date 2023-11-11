@@ -11,3 +11,6 @@ openai
 fuzzywuzzy
 python-Levenshtein
 requests
+uuid
+pyaudio
+pydub

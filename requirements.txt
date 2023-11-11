@@ -1,8 +1,12 @@
 flask
 Flask-SQLAlchemy
-panda
+pandas
 numpy
 gunicorn
 python-dotenv
 pytz
 apscheduler
+psycopg2-binary
+openai
+fuzzywuzzy
+python-Levenshtein

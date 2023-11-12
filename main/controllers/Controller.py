@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from main.services.assistants import get_reply
+from main.services.assistants import get_reply_by_assistant
 from main.services.audio import create_text_to_speech,create_speech_to_text,translate_speech_to_text
 import logging
 

@@ -13,7 +13,7 @@ from main.repositories.AssistantRepository import AssistantRepository
 
 logger = logging.getLogger(__name__)
 
-def get_reply(message_body):
+def get_reply_by_assistant(message_body):
     message_repo = MessageRepository()
     thread_repo = ThreadRepository()
     assistant_repo = AssistantRepository()

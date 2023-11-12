@@ -20,6 +20,7 @@ def generate_image_by_prompt(message_body):
         n=1
     )
     logger.info(f'Image created: {response.data[0].url}')
+    # print(response)
     return response.data[0]
 
 def generate_image_variations(message_body):
@@ -52,4 +53,9 @@ def get_vision_description(message_body):
         max_tokens=300
     )
     logger.info(f'Image description created: {response.choices[0]}')
+    # print(response)
     return response.choices[0]
+
+# get_vision_description({'prompt':'from the cheatsheets give me the list of al commands with headings and subheadings in json format.','urls':['https://miro.medium.com/v2/resize:fit:2000/1*PyqDkHpHdzqC-p1AKcW4Ew.png']})
+# generate_image_variations({'image_path':'/home/anoop/Downloads/1.png','n':2})
+# generate_image_by_prompt({'prompt':'give me cheatsheets of docker'})

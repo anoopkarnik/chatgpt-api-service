@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 logger = logging.getLogger(__name__)
 
 def chat_with_gpt(message_body):
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
     logger.info(f'OpenAI client created')
     model = message_body.get('model','gpt-4-1106-preview')
     message = message_body['message']

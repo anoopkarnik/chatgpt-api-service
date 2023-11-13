@@ -14,7 +14,7 @@ def health_check():
 @payload_controller.route("/chat",methods=["POST"])
 def chat_with_assistant():
 	message_body = request.json
-	result = get_reply(message_body)
+	result = get_reply_by_assistant(message_body)
 	return jsonify(result)
 
 @payload_controller.route("/text_to_speech",methods=["POST"])

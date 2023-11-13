@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 logger = logging.getLogger(__name__)
 
 def chat_with_gpt(message_body):
-    client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
+    client = OpenAI(api_key="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")
     logger.info(f'OpenAI client created')
     model = message_body.get('model','gpt-4-1106-preview')
     message = message_body['message']
@@ -24,7 +24,7 @@ def chat_with_gpt(message_body):
                 {"role":"system","content":system_instructions},
                 {"role":"user","content":message}
             ]
-        )
+        ).json()
     else:
         response = client.chat.completions.create(
         model = model,
@@ -32,6 +32,9 @@ def chat_with_gpt(message_body):
             {"role":"system","content":system_instructions},
             {"role":"user","content":message}
         ]
-        )
-    logger.info(f'Chat response created: {response.choices[0].message}')
-    return json.loads(response.choices[0].message)
+        ).json()
+    # print(json.loads(response)['choices'][0]['message']['content'])
+    logger.info(f'Chat response created: {response}')
+    return json.loads(response)['choices'][0]['message']
+
+chat_with_gpt({'message':'Hello, how are you?','system_instructions':'You are a helpful assistant'})

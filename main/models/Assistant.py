@@ -9,7 +9,7 @@ def get_ist_time():
 
 class Assistant(db.Model):
     __tablename__ = 'assistants'
-    __table_args__ = {"schema": "chatgpt_schema"}
+    __table_args__ = {"schema": "chatgpt_schema",'extend_existing': True}
 
     assistant_id = db.Column(db.String(255), primary_key=True)
     assistant_name = db.Column(db.String(255))
@@ -26,7 +26,7 @@ class Assistant(db.Model):
 
 class Thread(db.Model):
     __tablename__ = 'threads'
-    __table_args__ = {"schema": "chatgpt_schema"}
+    __table_args__ = {"schema": "chatgpt_schema",'extend_existing': True}
 
     thread_id = db.Column(db.String(255), primary_key=True)
     assistant_id = db.Column(db.String(255), db.ForeignKey('chatgpt_schema.assistants.assistant_id'))
@@ -41,7 +41,7 @@ class Thread(db.Model):
 
 class Message(db.Model):
     __tablename__ = 'messages'
-    __table_args__ = {"schema": "chatgpt_schema"}
+    __table_args__ = {"schema": "chatgpt_schema",'extend_existing': True}
 
     user_message_id = db.Column(db.String(255), primary_key=True)
     bot_message_id = db.Column(db.String(255))

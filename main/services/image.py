@@ -6,6 +6,7 @@ import time
 import json
 import pandas as pd
 from flask_sqlalchemy import SQLAlchemy
+import boto3
 
 logger = logging.getLogger(__name__)
 

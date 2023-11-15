@@ -15,3 +15,4 @@ uuid
 pyaudio
 pydub
 pytest
+boto3

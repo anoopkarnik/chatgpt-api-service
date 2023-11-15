@@ -18,9 +18,8 @@ class ThreadRepository:
         db.session.commit()
         return new_thread
 
-    def update_thread(self, thread_id,):
+    def update_thread(self, thread_id):
         thread = self.get_thread_by_id(thread_id)
-        thread.thread_name = thread_name
         db.session.commit()
         return thread
 

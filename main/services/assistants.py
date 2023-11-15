@@ -51,6 +51,7 @@ def get_reply_by_assistant(message_body):
     messages = client.beta.threads.messages.list(thread_id = thread_id).json()
     message_result = json.loads(messages)
     thread_id = message_result['data'][0]['thread_id']
+    logger.info(f'Messages retrieved: {message_result}')
     bot_message = '/n'.join([message['text']['value'] for message in message_result['data'][0]['content']])
     message_model = message_repo.create_message(
         message_result['data'][1]['id'],

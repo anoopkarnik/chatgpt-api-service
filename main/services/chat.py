@@ -6,11 +6,14 @@ import time
 import json
 import pandas as pd
 from flask_sqlalchemy import SQLAlchemy
+from main.repositories.ChatgptMessageRepository import ChatgptMessageRepository
 
 logger = logging.getLogger(__name__)
 
 def chat_with_gpt(message_body):
-    client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
+    chatgpt_message_repo = ChatgptMessageRepository()
+    openai_api_key = os.environ.get('OPENAI_API_KEY')
+    client = OpenAI(api_key=openai_api_key)
     logger.info(f'OpenAI client created')
     model = message_body.get('model','gpt-4-1106-preview')
     message = message_body['message']
@@ -33,8 +36,13 @@ def chat_with_gpt(message_body):
             {"role":"user","content":message}
         ]
         ).json()
+    
     # print(json.loads(response)['choices'][0]['message']['content'])
     logger.info(f'Chat response created: {response}')
-    return json.loads(response)['choices'][0]['message']
+    result = json.loads(response)
+    chatgpt_model = chatgpt_message_repo.create_message(result['id'],message,system_instructions,result['choices'][0]['message']['content'],
+                                                            result['usage']['completion_tokens'],result['usage']['prompt_tokens'],
+                                                            result['choices'][0]['finish_reason'],result['model'])
+    return json.loads(response)
 
-chat_with_gpt({'message':'Hello, how are you?','system_instructions':'You are a helpful assistant'})
+# chat_with_gpt({'message':'Hello, how are you?','system_instructions':'You are a helpful assistant'})

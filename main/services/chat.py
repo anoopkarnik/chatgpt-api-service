@@ -43,6 +43,6 @@ def chat_with_gpt(message_body):
     chatgpt_model = chatgpt_message_repo.create_message(result['id'],message,system_instructions,result['choices'][0]['message']['content'],
                                                             result['usage']['completion_tokens'],result['usage']['prompt_tokens'],
                                                             result['choices'][0]['finish_reason'],result['model'])
-    return json.loads(response)
+    return result
 
 # chat_with_gpt({'message':'Hello, how are you?','system_instructions':'You are a helpful assistant'})

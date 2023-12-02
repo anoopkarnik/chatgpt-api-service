@@ -8,7 +8,6 @@ import pandas as pd
 from flask_sqlalchemy import SQLAlchemy
 from pydub import AudioSegment
 from pydub.playback import play
-import pyaudio
 import uuid
 import boto3
 from main.utils.s3 import upload_to_s3,read_from_s3
@@ -38,7 +37,7 @@ def create_text_to_speech(message_body):
     audio_model = audio_repo.create_audio(id,message_body['message'],location_type,location_path,'text_to_speech',
                                           voice,model)
     if location_type == 's3':
-        bucket_name = os.environ.get('AUDIO_BUCKET_NAME') 
+        bucket_name = os.environ.get('VOICE_RECORDINGS_S3_BUCKET_NAME')
         upload_to_s3(os.path.join("data",file_name),location_path,bucket_name)
     audio = AudioSegment.from_mp3(os.path.join("data",file_name))
     play(audio)
@@ -55,7 +54,7 @@ def create_speech_to_text(message_body):
     if location_type == 'local':
         audio_file = open(location_path, 'rb')
     else:
-        bucket_name = os.environ.get('AUDIO_BUCKET_NAME')
+        bucket_name = os.environ.get('VOICE_RECORDINGS_S3_BUCKET_NAME')
         audio_file =read_from_s3(location_path,bucket_name)
     transcript = client.audio.transcriptions.create(
         model=model,
@@ -79,7 +78,7 @@ def translate_speech_to_text(message_body):
     if location_type == 'local':
         audio_file = open(location_path, 'rb')
     else:
-        bucket_name = os.environ.get('AUDIO_BUCKET_NAME')
+        bucket_name = os.environ.get('VOICE_RECORDINGS_S3_BUCKET_NAME')
         audio_file =read_from_s3(location_path,bucket_name)
     transcript = client.audio.translations.create(
         model=model,

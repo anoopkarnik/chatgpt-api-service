@@ -16,3 +16,4 @@ pyaudio
 pydub
 pytest
 boto3
+tiktoken

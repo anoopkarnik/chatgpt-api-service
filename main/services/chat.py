@@ -15,7 +15,7 @@ def chat_with_gpt(message_body):
     openai_api_key = os.environ.get('OPENAI_API_KEY')
     client = OpenAI(api_key=openai_api_key)
     logger.info(f'OpenAI client created')
-    model = message_body.get('model','gpt-4-1106-preview')
+    model = message_body.get('model','gpt-4-32k-0613')
     message = message_body['message']
     system_instructions = message_body.get('system_instructions','You are a helpful assistant')
     if 'format' in message_body:
